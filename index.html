@@ -126,6 +126,26 @@
   .mode-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
   .mode-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.4; }
 
+  .level-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .level-btn {
+    padding: 6px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .level-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+  .level-btn.selected { border-color: var(--accent); color: var(--accent); background: rgba(232,197,71,0.08); }
+
   .cat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; font-weight: 500; }
   .cat-grid {
     display: flex; flex-wrap: wrap; gap: 8px;
@@ -473,6 +493,17 @@
   <h1 class="home-title">İspanyolca<br><em>öğren.</em></h1>
   <p class="home-sub">Kelime hazineni geliştirmek için bir mod seç ve pratik yapmaya başla.</p>
 
+  <div class="cat-label">Seviye</div>
+  <div class="level-grid">
+    <button class="level-btn selected" data-level="A1" onclick="selectLevel(this)">A1</button>
+    <button class="level-btn" data-level="A2" onclick="selectLevel(this)">A2</button>
+    <button class="level-btn" data-level="B1" onclick="selectLevel(this)">B1</button>
+    <button class="level-btn" data-level="B2" onclick="selectLevel(this)">B2</button>
+    <button class="level-btn" data-level="C1" onclick="selectLevel(this)">C1</button>
+    <button class="level-btn" data-level="C2" onclick="selectLevel(this)">C2</button>
+    <button class="level-btn" data-level="all" onclick="selectLevel(this)">Hepsi</button>
+  </div>
+
   <div class="cat-label">Çalışma Modu</div>
   <div class="mode-grid">
     <div class="mode-card selected" data-mode="multiple" onclick="selectMode(this)">
@@ -502,9 +533,14 @@
     <button class="cat-btn selected" data-cat="all" onclick="selectCat(this)">Hepsi</button>
     <button class="cat-btn" data-cat="fiil" onclick="selectCat(this)">Fiiller</button>
     <button class="cat-btn" data-cat="isim" onclick="selectCat(this)">İsimler</button>
-    <button class="cat-btn" data-cat="sifat" onclick="selectCat(this)">Sıfatlar</button>
-    <button class="cat-btn" data-cat="zaman" onclick="selectCat(this)">Zaman & Gün</button>
+    <button class="cat-btn" data-cat="sıfat" onclick="selectCat(this)">Sıfatlar</button>
+    <button class="cat-btn" data-cat="zarf" onclick="selectCat(this)">Zarflar</button>
+    <button class="cat-btn" data-cat="bağlaç" onclick="selectCat(this)">Bağlaçlar</button>
+    <button class="cat-btn" data-cat="zaman" onclick="selectCat(this)">Zaman</button>
     <button class="cat-btn" data-cat="seyahat" onclick="selectCat(this)">Seyahat</button>
+    <button class="cat-btn" data-cat="günlük" onclick="selectCat(this)">Günlük</button>
+    <button class="cat-btn" data-cat="aile" onclick="selectCat(this)">Aile</button>
+    <button class="cat-btn" data-cat="renk" onclick="selectCat(this)">Renkler</button>
   </div>
 
   <button class="start-btn" id="start-btn" onclick="startQuiz()" disabled style="opacity:0.6">Yükleniyor...</button>
@@ -515,7 +551,10 @@
   <button class="back-btn" onclick="goHome()">← Ana Sayfa</button>
   <div class="quiz-meta">
     <span class="quiz-counter" id="q-counter">1 / 10</span>
-    <span class="score-badge">Puan <span id="score-display">0</span></span>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span class="score-badge" id="level-badge">A1</span>
+      <span class="score-badge">Puan <span id="score-display">0</span></span>
+    </div>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:10%"></div></div>
   <div class="streak-bar" id="streak-bar"></div>
@@ -542,7 +581,10 @@
   <button class="back-btn" onclick="goHome()">← Ana Sayfa</button>
   <div class="quiz-meta">
     <span class="quiz-counter" id="flash-counter">1 / 10</span>
-    <span class="score-badge">Bildi <span id="flash-score">0</span></span>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span class="score-badge" id="flash-level-badge">A1</span>
+      <span class="score-badge">Bildi <span id="flash-score">0</span></span>
+    </div>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="flash-prog" style="width:10%"></div></div>
 
@@ -618,6 +660,7 @@ function initHome() {
 loadWords();
 
 let currentMode = 'multiple';
+let currentLevel = 'A1';
 let currentCat = 'all';
 let queue = [];
 let qIndex = 0;
@@ -643,9 +686,16 @@ function selectCat(el) {
   currentCat = el.dataset.cat;
 }
 
+function selectLevel(el) {
+  document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  currentLevel = el.dataset.level;
+}
+
 function getPool() {
-  if (currentCat === 'all') return WORDS;
-  return WORDS.filter(w => w.cat === currentCat);
+  let pool = currentLevel === 'all' ? WORDS : WORDS.filter(w => w.level === currentLevel);
+  if (currentCat !== 'all') pool = pool.filter(w => w.cat === currentCat);
+  return pool;
 }
 
 function showScreen(id) {
@@ -660,6 +710,10 @@ function startQuiz() {
   if (pool.length < 4) { alert('Bu kategoride yeterli kelime yok!'); return; }
   queue = shuffle(pool).slice(0, Math.min(10, pool.length));
   qIndex = 0; score = 0; correct = 0; wrong = 0; streakHistory = [];
+
+  const levelLabel = currentLevel === 'all' ? 'Hepsi' : currentLevel;
+  document.getElementById('level-badge').textContent = levelLabel;
+  document.getElementById('flash-level-badge').textContent = levelLabel;
 
   if (currentMode === 'flash') {
     flashKnew = 0;
