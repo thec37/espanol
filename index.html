@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Español — Kelime Pratiği</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1827;
+    --surface2: #242236;
+    --accent: #e8c547;
+    --accent2: #f07167;
+    --accent3: #7ec8e3;
+    --text: #f4f0eb;
+    --muted: #7a7590;
+    --correct: #4caf7d;
+    --wrong: #e05c5c;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Background decoration */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,197,71,0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(126,200,227,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    width: 100%;
+    max-width: 680px;
+    padding: 2.5rem 2rem 1.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .logo span { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em; font-family: 'DM Sans', sans-serif; font-weight: 300; margin-left: 8px; }
+
+  /* ---- SCREENS ---- */
+  .screen { display: none; width: 100%; max-width: 680px; padding: 0 2rem 4rem; position: relative; z-index: 1; }
+  .screen.active { display: block; animation: fadeIn 0.4s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pop { 0% { transform: scale(0.95); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+
+  /* ---- HOME ---- */
+  .home-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .home-title em { color: var(--accent); font-style: italic; }
+  .home-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .mode-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+  .mode-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem 1.1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .mode-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+  .mode-card:hover { border-color: rgba(255,255,255,0.18); transform: translateY(-2px); }
+  .mode-card.selected { border-color: var(--accent); background: rgba(232,197,71,0.07); }
+  .mode-card.selected::before { background: var(--accent); }
+  .mode-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .mode-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .mode-desc { font-size: 0.75rem; color: var(--muted); font-weight: 300; line-height: 1.4; }
+
+  .cat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; font-weight: 500; }
+  .cat-grid {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .cat-btn {
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .cat-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+  .cat-btn.selected { border-color: var(--accent3); color: var(--accent3); background: rgba(126,200,227,0.08); }
+
+  .start-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent);
+    color: #0f0e17;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .start-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .start-btn:active { transform: scale(0.99); }
+
+  /* ---- QUIZ ---- */
+  .quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .quiz-counter { font-size: 0.8rem; color: var(--muted); }
+  .score-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+  .score-badge span { color: var(--accent); font-weight: 500; }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--surface2);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .question-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+
+  .q-direction {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    background: var(--surface2);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .q-direction .arrow { color: var(--accent); }
+
+  .q-category {
+    font-size: 0.75rem;
+    color: var(--accent3);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .q-word {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+
+  /* Fill-in mode */
+  .fill-input {
+    width: 100%;
+    margin-top: 1.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    font-size: 1.1rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .fill-input:focus { border-color: rgba(255,255,255,0.25); }
+  .fill-input.correct-input { border-color: var(--correct); background: rgba(76,175,125,0.08); }
+  .fill-input.wrong-input { border-color: var(--wrong); background: rgba(224,92,92,0.08); }
+
+  .submit-btn {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.85rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .submit-btn:hover { background: var(--surface); border-color: rgba(255,255,255,0.2); }
+
+  /* Options */
+  .options { display: grid; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.9rem 1.1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  }
+  .opt-letter {
+    width: 28px; height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .opt:hover:not(:disabled) { border-color: rgba(255,255,255,0.2); transform: translateX(3px); }
+  .opt:hover:not(:disabled) .opt-letter { border-color: rgba(255,255,255,0.3); color: var(--text); }
+
+  .opt.correct-opt { border-color: var(--correct); background: rgba(76,175,125,0.1); animation: pop 0.3s ease; }
+  .opt.correct-opt .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong-opt { border-color: var(--wrong); background: rgba(224,92,92,0.1); animation: shake 0.3s ease; }
+  .opt.wrong-opt .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+
+  /* Feedback */
+  .feedback {
+    min-height: 32px;
+    font-size: 0.875rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0.75rem;
+    padding: 0 0.25rem;
+  }
+  .feedback .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+  .feedback.show-correct .dot { background: var(--correct); }
+  .feedback.show-correct { color: var(--correct); }
+  .feedback.show-wrong .dot { background: var(--wrong); }
+  .feedback.show-wrong { color: var(--wrong); }
+
+  .next-btn {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .next-btn.visible { display: flex; animation: fadeIn 0.25s ease; }
+  .next-btn:hover { background: var(--surface); border-color: rgba(255,255,255,0.25); }
+  .next-arrow { transition: transform 0.2s; }
+  .next-btn:hover .next-arrow { transform: translateX(4px); }
+
+  /* ---- FLASHCARD ---- */
+  .flashcard-wrap {
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+  }
+  .flashcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    text-align: center;
+    height: 240px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2rem;
+    position: relative;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .flashcard::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    border-radius: 20px 20px 0 0;
+  }
+  .flashcard.flipped { background: var(--surface2); }
+  .flashcard.flip-out { opacity: 0; transform: scale(0.96); }
+  .card-hint { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .card-word { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; }
+  .card-category { font-size: 0.8rem; color: var(--accent3); margin-top: 0.75rem; }
+  .card-example { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  .flash-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+  .flash-btn {
+    padding: 0.85rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .flash-btn.knew { background: rgba(76,175,125,0.1); border-color: rgba(76,175,125,0.3); color: var(--correct); }
+  .flash-btn.knew:hover { background: rgba(76,175,125,0.2); }
+  .flash-btn.didnt { background: rgba(224,92,92,0.1); border-color: rgba(224,92,92,0.3); color: var(--wrong); }
+  .flash-btn.didnt:hover { background: rgba(224,92,92,0.2); }
+
+  /* ---- RESULT ---- */
+  .result-ring {
+    width: 120px; height: 120px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+  }
+  .result-ring svg { transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: var(--surface2); stroke-width: 8; }
+  .ring-fill { fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1); }
+  .ring-text {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .ring-pct { font-size: 1.6rem; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--accent); }
+  .ring-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .result-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 0.4rem; }
+  .result-sub { color: var(--muted); text-align: center; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 300; }
+
+  .result-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-num { font-size: 1.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .stat-lbl { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+
+  .result-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .res-btn {
+    padding: 0.9rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: transparent;
+    color: var(--text);
+  }
+  .res-btn.primary { background: var(--accent); color: #0f0e17; border-color: var(--accent); font-weight: 500; }
+  .res-btn:hover { background: var(--surface); }
+  .res-btn.primary:hover { opacity: 0.9; background: var(--accent); }
+
+  /* ---- NAV ---- */
+  .back-btn {
+    background: none; border: none; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    cursor: pointer; padding: 0; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 6px;
+    transition: color 0.15s;
+  }
+  .back-btn:hover { color: var(--text); }
+
+  /* Streaks */
+  .streak-bar { display: flex; gap: 5px; margin-bottom: 2rem; }
+  .streak-dot { width: 28px; height: 5px; border-radius: 3px; background: var(--surface2); transition: background 0.3s; }
+  .streak-dot.correct-dot { background: var(--correct); }
+  .streak-dot.wrong-dot { background: var(--wrong); }
+
+  @media (max-width: 480px) {
+    header, .screen { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .mode-grid { grid-template-columns: 1fr; }
+    .result-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Español<span>kelime pratiği</span></div>
+</header>
+
+<!-- HOME SCREEN -->
+<div class="screen active" id="screen-home">
+  <h1 class="home-title">İspanyolca<br><em>öğren.</em></h1>
+  <p class="home-sub">Kelime hazineni geliştirmek için bir mod seç ve pratik yapmaya başla.</p>
+
+  <div class="cat-label">Çalışma Modu</div>
+  <div class="mode-grid">
+    <div class="mode-card selected" data-mode="multiple" onclick="selectMode(this)">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-name">Çoktan Seçmeli</div>
+      <div class="mode-desc">4 seçenekten doğrusunu bul</div>
+    </div>
+    <div class="mode-card" data-mode="fill" onclick="selectMode(this)">
+      <div class="mode-icon">✍️</div>
+      <div class="mode-name">Boşluk Doldur</div>
+      <div class="mode-desc">Kelimeyi kendin yaz</div>
+    </div>
+    <div class="mode-card" data-mode="flash" onclick="selectMode(this)">
+      <div class="mode-icon">🃏</div>
+      <div class="mode-name">Kartlar</div>
+      <div class="mode-desc">Kartı çevir, bildiklerini say</div>
+    </div>
+    <div class="mode-card" data-mode="reverse" onclick="selectMode(this)">
+      <div class="mode-icon">🔄</div>
+      <div class="mode-name">Ters Sınav</div>
+      <div class="mode-desc">İspanyolcadan Türkçeye</div>
+    </div>
+  </div>
+
+  <div class="cat-label">Kategori</div>
+  <div class="cat-grid" id="cat-grid">
+    <button class="cat-btn selected" data-cat="all" onclick="selectCat(this)">Hepsi</button>
+    <button class="cat-btn" data-cat="fiil" onclick="selectCat(this)">Fiiller</button>
+    <button class="cat-btn" data-cat="isim" onclick="selectCat(this)">İsimler</button>
+    <button class="cat-btn" data-cat="sifat" onclick="selectCat(this)">Sıfatlar</button>
+    <button class="cat-btn" data-cat="zaman" onclick="selectCat(this)">Zaman & Gün</button>
+    <button class="cat-btn" data-cat="seyahat" onclick="selectCat(this)">Seyahat</button>
+  </div>
+
+  <button class="start-btn" id="start-btn" onclick="startQuiz()" disabled style="opacity:0.6">Yükleniyor...</button>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div class="screen" id="screen-quiz">
+  <button class="back-btn" onclick="goHome()">← Ana Sayfa</button>
+  <div class="quiz-meta">
+    <span class="quiz-counter" id="q-counter">1 / 10</span>
+    <span class="score-badge">Puan <span id="score-display">0</span></span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:10%"></div></div>
+  <div class="streak-bar" id="streak-bar"></div>
+
+  <div class="question-card" id="question-card">
+    <div class="q-direction" id="q-direction">
+      <span id="dir-from">Türkçe</span>
+      <span class="arrow">→</span>
+      <span id="dir-to">İspanyolca</span>
+    </div>
+    <div class="q-category" id="q-cat"></div>
+    <div class="q-word" id="q-word"></div>
+  </div>
+
+  <div id="options-container"></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="next-btn" id="next-btn" onclick="nextQuestion()">
+    Sonraki <span class="next-arrow">→</span>
+  </button>
+</div>
+
+<!-- FLASH SCREEN -->
+<div class="screen" id="screen-flash">
+  <button class="back-btn" onclick="goHome()">← Ana Sayfa</button>
+  <div class="quiz-meta">
+    <span class="quiz-counter" id="flash-counter">1 / 10</span>
+    <span class="score-badge">Bildi <span id="flash-score">0</span></span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="flash-prog" style="width:10%"></div></div>
+
+  <div class="flashcard-wrap" onclick="flipCard()">
+    <div class="flashcard" id="flashcard">
+      <div class="card-hint" id="flash-hint">Türkçe</div>
+      <div class="card-word" id="flash-word"></div>
+      <div class="card-category" id="flash-cat-el"></div>
+      <div id="flash-tap-hint" style="margin-top:1.5rem; font-size:0.78rem; color:var(--muted)">dokunarak çevir</div>
+      <div class="card-example" id="flash-ex" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="flash-actions" id="flash-actions" style="display:none">
+    <button class="flash-btn didnt" onclick="flashAnswer(false)">✕ Bilmedim</button>
+    <button class="flash-btn knew" onclick="flashAnswer(true)">✓ Bildim</button>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div class="screen" id="screen-result">
+  <div class="result-ring">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle class="ring-bg" cx="60" cy="60" r="52"/>
+      <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52"
+        stroke-dasharray="326.7"
+        stroke-dashoffset="326.7"/>
+    </svg>
+    <div class="ring-text">
+      <div class="ring-pct" id="ring-pct">0%</div>
+      <div class="ring-label">başarı</div>
+    </div>
+  </div>
+
+  <div class="result-title" id="res-title">Harika!</div>
+  <div class="result-sub" id="res-sub"></div>
+
+  <div class="result-stats">
+    <div class="stat-card">
+      <div class="stat-num" id="res-correct" style="color:var(--correct)">0</div>
+      <div class="stat-lbl">Doğru</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="res-wrong" style="color:var(--wrong)">0</div>
+      <div class="stat-lbl">Yanlış</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="res-total">0</div>
+      <div class="stat-lbl">Toplam</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="res-btn" onclick="goHome()">Ana Sayfa</button>
+    <button class="res-btn primary" onclick="restartSame()">Tekrar Dene</button>
+  </div>
+</div>
+
+<script>
+let WORDS = [];
+
+async function loadWords() {
+  const res = await fetch('words.json');
+  WORDS = await res.json();
+  initHome();
+}
+
+function initHome() {
+  document.getElementById('start-btn').disabled = false;
+  document.getElementById('start-btn').textContent = 'Başla →'; document.getElementById('start-btn').style.opacity = '1';
+}
+
+loadWords();
+
+let currentMode = 'multiple';
+let currentCat = 'all';
+let queue = [];
+let qIndex = 0;
+let score = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+let streakHistory = [];
+let isFlipped = false;
+let flashKnew = 0;
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function selectMode(el) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  currentMode = el.dataset.mode;
+}
+
+function selectCat(el) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  currentCat = el.dataset.cat;
+}
+
+function getPool() {
+  if (currentCat === 'all') return WORDS;
+  return WORDS.filter(w => w.cat === currentCat);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goHome() { showScreen('screen-home'); }
+
+function startQuiz() {
+  const pool = getPool();
+  if (pool.length < 4) { alert('Bu kategoride yeterli kelime yok!'); return; }
+  queue = shuffle(pool).slice(0, Math.min(10, pool.length));
+  qIndex = 0; score = 0; correct = 0; wrong = 0; streakHistory = [];
+
+  if (currentMode === 'flash') {
+    flashKnew = 0;
+    showScreen('screen-flash');
+    showFlashCard();
+  } else {
+    showScreen('screen-quiz');
+    buildStreakBar();
+    showQuestion();
+  }
+}
+
+function buildStreakBar() {
+  const bar = document.getElementById('streak-bar');
+  bar.innerHTML = '';
+  for (let i = 0; i < queue.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'streak-dot'; d.id = 'dot-' + i;
+    bar.appendChild(d);
+  }
+}
+
+function showQuestion() {
+  answered = false;
+  document.getElementById('next-btn').classList.remove('visible');
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('feedback').className = 'feedback';
+
+  const w = queue[qIndex];
+  const isReverse = currentMode === 'reverse';
+  document.getElementById('q-counter').textContent = `${qIndex + 1} / ${queue.length}`;
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('prog-fill').style.width = `${((qIndex + 1) / queue.length) * 100}%`;
+
+  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  document.getElementById('q-cat').textContent = catLabels[w.cat] || w.cat;
+
+  if (isReverse) {
+    document.getElementById('dir-from').textContent = 'İspanyolca';
+    document.getElementById('dir-to').textContent = 'Türkçe';
+    document.getElementById('q-word').textContent = w.es;
+  } else {
+    document.getElementById('dir-from').textContent = 'Türkçe';
+    document.getElementById('dir-to').textContent = 'İspanyolca';
+    document.getElementById('q-word').textContent = w.tr;
+  }
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+
+  if (currentMode === 'fill') {
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.className = 'fill-input'; inp.placeholder = 'İspanyolcasını yaz...';
+    inp.id = 'fill-inp';
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') submitFill(); });
+    container.appendChild(inp);
+    const btn = document.createElement('button');
+    btn.className = 'submit-btn'; btn.textContent = 'Kontrol Et'; btn.onclick = submitFill;
+    container.appendChild(btn);
+    setTimeout(() => inp.focus(), 100);
+  } else {
+    const pool = getPool();
+    const field = isReverse ? 'tr' : 'es';
+    const correctAns = isReverse ? w.tr : w.es;
+    const wrongs = shuffle(pool.filter(x => x[field] !== correctAns)).slice(0, 3).map(x => x[field]);
+    const opts = shuffle([correctAns, ...wrongs]);
+    const letters = ['A','B','C','D'];
+    const div = document.createElement('div'); div.className = 'options';
+    opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+      btn.onclick = () => checkOpt(btn, opt, correctAns);
+      div.appendChild(btn);
+    });
+    container.appendChild(div);
+  }
+}
+
+function submitFill() {
+  if (answered) return;
+  const inp = document.getElementById('fill-inp');
+  const w = queue[qIndex];
+  const userVal = inp.value.trim().toLowerCase();
+  const correct_ans = w.es.toLowerCase();
+  checkFill(inp, userVal, correct_ans, w.es);
+}
+
+function checkFill(inp, userVal, correctVal, display) {
+  answered = true;
+  inp.disabled = true;
+  document.querySelector('.submit-btn').disabled = true;
+  if (userVal === correctVal || userVal === correctVal.replace('í','i').replace('é','e').replace('á','a').replace('ó','o').replace('ú','u').replace('ñ','n')) {
+    inp.classList.add('correct-input');
+    setFeedback(true, '');
+    score += 10; correct++;
+    markStreak(qIndex, true);
+  } else {
+    inp.classList.add('wrong-input');
+    setFeedback(false, `Doğrusu: ${display}`);
+    wrong++;
+    markStreak(qIndex, false);
+  }
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('next-btn').classList.add('visible');
+}
+
+function checkOpt(btn, chosen, correctAns) {
+  if (answered) return;
+  answered = true;
+  document.querySelectorAll('.opt').forEach(b => { b.disabled = true; });
+  if (chosen === correctAns) {
+    btn.classList.add('correct-opt');
+    setFeedback(true, '');
+    score += 10; correct++;
+    markStreak(qIndex, true);
+  } else {
+    btn.classList.add('wrong-opt');
+    document.querySelectorAll('.opt').forEach(b => { if (b.textContent.trim().slice(1) === correctAns || b.innerHTML.includes(correctAns)) b.classList.add('correct-opt'); });
+    setFeedback(false, `Doğrusu: ${correctAns}`);
+    wrong++;
+    markStreak(qIndex, false);
+  }
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('next-btn').classList.add('visible');
+}
+
+function setFeedback(isCorrect, hint) {
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback ' + (isCorrect ? 'show-correct' : 'show-wrong');
+  fb.innerHTML = `<span class="dot"></span>${isCorrect ? 'Doğru!' : (hint || 'Yanlış!')}`;
+}
+
+function markStreak(i, isCorrect) {
+  const dot = document.getElementById('dot-' + i);
+  if (dot) dot.classList.add(isCorrect ? 'correct-dot' : 'wrong-dot');
+}
+
+function nextQuestion() {
+  qIndex++;
+  if (qIndex >= queue.length) { showResult(); return; }
+  showQuestion();
+}
+
+function showResult() {
+  const total = queue.length;
+  const pct = Math.round((correct / total) * 100);
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-total').textContent = total;
+  document.getElementById('ring-pct').textContent = pct + '%';
+  const titles = pct >= 90 ? ['Mükemmel! 🏆','Kelime hazinen gerçekten harika!'] : pct >= 70 ? ['Çok İyi! 👏','Biraz daha pratikle mükemmel olacaksın.'] : pct >= 50 ? ['Fena Değil 💪','Düzenli çalışmaya devam et!'] : ['Daha Çok Pratik 📚','Zorlanma, tekrar edince gelir!'];
+  document.getElementById('res-title').textContent = titles[0];
+  document.getElementById('res-sub').textContent = titles[1];
+  showScreen('screen-result');
+  setTimeout(() => {
+    const circumference = 326.7;
+    const offset = circumference - (pct / 100) * circumference;
+    document.getElementById('ring-fill').style.strokeDashoffset = offset;
+  }, 200);
+}
+
+function restartSame() { startQuiz(); }
+
+// FLASHCARD
+function showFlashCard() {
+  if (qIndex >= queue.length) { showFlashResult(); return; }
+  isFlipped = false;
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  document.getElementById('flash-actions').style.display = 'none';
+  const w = queue[qIndex];
+  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  document.getElementById('flash-hint').textContent = 'Türkçe';
+  document.getElementById('flash-word').textContent = w.tr;
+  document.getElementById('flash-cat-el').textContent = catLabels[w.cat] || '';
+  document.getElementById('flash-tap-hint').style.display = 'block';
+  document.getElementById('flash-ex').style.display = 'none';
+  document.getElementById('flash-counter').textContent = `${qIndex + 1} / ${queue.length}`;
+  document.getElementById('flash-prog').style.width = `${((qIndex + 1) / queue.length) * 100}%`;
+}
+
+function flipCard() {
+  if (isFlipped) return;
+  isFlipped = true;
+  const card = document.getElementById('flashcard');
+  const w = queue[qIndex];
+  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  card.classList.add('flip-out');
+  setTimeout(() => {
+    card.classList.add('flipped');
+    document.getElementById('flash-hint').textContent = 'İspanyolca';
+    document.getElementById('flash-word').textContent = w.es;
+    document.getElementById('flash-cat-el').textContent = catLabels[w.cat] || '';
+    document.getElementById('flash-tap-hint').style.display = 'none';
+    document.getElementById('flash-ex').textContent = w.ex || '';
+    document.getElementById('flash-ex').style.display = w.ex ? 'block' : 'none';
+    card.classList.remove('flip-out');
+    document.getElementById('flash-actions').style.display = 'grid';
+  }, 180);
+}
+
+function flashAnswer(knew) {
+  if (knew) flashKnew++;
+  document.getElementById('flash-score').textContent = flashKnew;
+  qIndex++;
+  setTimeout(showFlashCard, 200);
+}
+
+function showFlashResult() {
+  const pct = Math.round((flashKnew / queue.length) * 100);
+  correct = flashKnew; wrong = queue.length - flashKnew;
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-total').textContent = queue.length;
+  document.getElementById('ring-pct').textContent = pct + '%';
+  const titles = pct >= 80 ? ['Harika! 🌟','Kelime kartlarında çok iyisin!'] : ['Devam Et! 💪','Tekrar ettikçe daha iyi olacaksın.'];
+  document.getElementById('res-title').textContent = titles[0];
+  document.getElementById('res-sub').textContent = titles[1];
+  showScreen('screen-result');
+  setTimeout(() => {
+    const offset = 326.7 - (pct / 100) * 326.7;
+    document.getElementById('ring-fill').style.strokeDashoffset = offset;
+  }, 200);
+}
+</script>
+</body>
+</html>
