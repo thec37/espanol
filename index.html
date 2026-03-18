@@ -165,6 +165,22 @@
   .cat-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
   .cat-btn.selected { border-color: var(--accent3); color: var(--accent3); background: rgba(126,200,227,0.08); }
 
+  .grammar-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .grammar-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--text); background: var(--surface); }
+
   .start-btn {
     width: 100%;
     padding: 1rem;
@@ -475,6 +491,90 @@
   .streak-dot.correct-dot { background: var(--correct); }
   .streak-dot.wrong-dot { background: var(--wrong); }
 
+
+  /* ---- GRAMMAR ---- */
+  .gtab-bar { display:flex; gap:6px; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .gtab {
+    padding:6px 16px; border-radius:100px; border:1px solid var(--border);
+    background:transparent; color:var(--muted); font-size:0.82rem; font-weight:500;
+    cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.15s; letter-spacing:0.03em;
+  }
+  .gtab:hover { border-color:rgba(255,255,255,0.2); color:var(--text); }
+  .gtab.active { border-color:var(--accent); color:var(--accent); background:rgba(232,197,71,0.08); }
+  .gtab-content { display:none; }
+  .gtab-content.active { display:block; animation:fadeIn 0.3s ease; }
+  .g-intro { color:var(--muted); font-size:0.9rem; margin-bottom:1.25rem; line-height:1.7; font-weight:300; }
+
+  .g-group-card { border-radius:var(--border-radius-lg); border:1px solid var(--border); padding:1.25rem; margin-bottom:1rem; }
+  .g-group-card.ar { border-left:3px solid #e8c547; }
+  .g-group-card.er { border-left:3px solid #7ec8e3; }
+  .g-group-card.ir { border-left:3px solid #f07167; }
+  .g-group-title { font-size:1.1rem; font-weight:500; font-family:'Playfair Display',serif; margin-bottom:0.25rem; }
+  .g-group-card.ar .g-group-title { color:var(--accent); }
+  .g-group-card.er .g-group-title { color:var(--accent3); }
+  .g-group-card.ir .g-group-title { color:var(--accent2); }
+  .g-group-ex { font-size:0.78rem; color:var(--muted); margin-bottom:1rem; font-style:italic; }
+  .g-table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+  .g-table th { text-align:left; color:var(--muted); font-weight:500; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; padding:0 0 6px; border-bottom:1px solid var(--border); }
+  .g-table td { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.03); color:var(--text); }
+  .g-table td:first-child { color:var(--muted); width:90px; }
+  .g-table strong { color:var(--accent); }
+
+  .g-tense-card { border-radius:var(--border-radius-lg); border:1px solid var(--border); margin-bottom:1rem; overflow:hidden; }
+  .g-tense-header { padding:0.9rem 1.25rem; display:flex; justify-content:space-between; align-items:center; }
+  .g-tense-card.present .g-tense-header { background:rgba(126,200,227,0.08); border-bottom:1px solid rgba(126,200,227,0.15); }
+  .g-tense-card.preterito .g-tense-header { background:rgba(240,113,103,0.08); border-bottom:1px solid rgba(240,113,103,0.15); }
+  .g-tense-card.futuro .g-tense-header { background:rgba(232,197,71,0.08); border-bottom:1px solid rgba(232,197,71,0.15); }
+  .g-tense-name { font-size:1rem; font-weight:500; font-family:'Playfair Display',serif; }
+  .g-tense-card.present .g-tense-name { color:var(--accent3); }
+  .g-tense-card.preterito .g-tense-name { color:var(--accent2); }
+  .g-tense-card.futuro .g-tense-name { color:var(--accent); }
+  .g-tense-tr { font-size:0.78rem; color:var(--muted); }
+  .g-tense-body { padding:1rem 1.25rem; }
+  .g-when-label { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem; font-weight:500; }
+  .g-when-list { list-style:none; padding:0; margin:0 0 1rem; }
+  .g-when-list li { font-size:0.87rem; color:var(--text); padding:4px 0; line-height:1.5; }
+  .g-when-list li::before { content:'→'; color:var(--muted); margin-right:8px; }
+  .g-when-list em { color:var(--accent); font-style:italic; }
+  .g-tense-ex-label { font-size:0.72rem; color:var(--muted); margin-bottom:4px; }
+  .g-mini-conj { font-size:0.85rem; color:var(--text); background:var(--surface2); border-radius:var(--border-radius-md); padding:8px 12px; letter-spacing:0.02em; }
+
+  .g-irreg-card { border:1px solid var(--border); border-radius:var(--border-radius-lg); padding:1.1rem 1.25rem; margin-bottom:1rem; }
+  .g-irreg-verb { font-size:1.05rem; font-weight:500; font-family:'Playfair Display',serif; color:var(--accent); margin-bottom:0.2rem; }
+  .g-irreg-verb span.g-irreg-tr { font-size:0.8rem; color:var(--muted); font-family:'DM Sans',sans-serif; font-weight:300; margin-left:8px; }
+  .g-irreg-note { font-size:0.78rem; color:var(--accent3); margin-bottom:0.9rem; font-style:italic; }
+  .g-three-tenses { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .g-tense-col { background:var(--surface2); border-radius:var(--border-radius-md); padding:8px 10px; font-size:0.78rem; line-height:1.7; color:var(--text); }
+  .g-col-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:4px; font-weight:500; }
+
+  .g-pronoun-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.25rem; }
+  .g-pronoun-card { border:1px solid var(--border); border-radius:var(--border-radius-lg); padding:1rem; }
+  .g-pronoun-card.yo { border-left:3px solid var(--accent); }
+  .g-pronoun-card.tu { border-left:3px solid var(--accent3); }
+  .g-pronoun-card.el { border-left:3px solid var(--accent2); }
+  .g-pronoun-card.nos { border-left:3px solid #4caf7d; }
+  .g-pronoun-card.vos { border-left:3px solid #9b8ed6; }
+  .g-pronoun-card.ellos { border-left:3px solid #e8a045; }
+  .g-pron-es { font-size:1rem; font-weight:500; font-family:'Playfair Display',serif; margin-bottom:0.15rem; }
+  .g-pron-tr { font-size:0.78rem; color:var(--muted); margin-bottom:0.4rem; }
+  .g-pron-note { font-size:0.72rem; color:var(--muted); font-style:italic; line-height:1.4; }
+  .g-practice-btn-wrap { margin-top:0.5rem; }
+
+  .g-tip {
+    display:flex; gap:10px; align-items:flex-start;
+    background:rgba(232,197,71,0.06); border:1px solid rgba(232,197,71,0.15);
+    border-radius:var(--border-radius-md); padding:0.9rem 1rem;
+    font-size:0.84rem; color:var(--muted); line-height:1.6;
+    margin-top:1rem;
+  }
+  .g-tip-icon { font-size:1rem; flex-shrink:0; margin-top:1px; }
+  .g-tip strong { color:var(--text); }
+  .g-tip em { color:var(--accent); font-style:italic; }
+
+  @media (max-width:480px) {
+    .g-three-tenses { grid-template-columns:1fr; }
+    .g-pronoun-grid { grid-template-columns:1fr; }
+  }
   @media (max-width: 480px) {
     header, .screen { padding-left: 1.25rem; padding-right: 1.25rem; }
     .mode-grid { grid-template-columns: 1fr; }
@@ -546,6 +646,7 @@
     <button class="cat-btn" data-cat="conjugation" onclick="selectCat(this)">Fiil Çekimi</button>
   </div>
 
+  <button class="grammar-btn" onclick="showScreen('screen-grammar')">📖 Dilbilgisi Rehberi</button>
   <button class="start-btn" id="start-btn" onclick="startQuiz()" disabled style="opacity:0.6">Yükleniyor...</button>
 </div>
 
@@ -604,6 +705,308 @@
   <div class="flash-actions" id="flash-actions" style="display:none">
     <button class="flash-btn didnt" onclick="flashAnswer(false)">✕ Bilmedim</button>
     <button class="flash-btn knew" onclick="flashAnswer(true)">✓ Bildim</button>
+  </div>
+</div>
+
+
+<!-- GRAMMAR SCREEN -->
+<div class="screen" id="screen-grammar">
+  <button class="back-btn" onclick="goHome()">← Ana Sayfa</button>
+
+  <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:0.25rem;">Fiil Çekimleri</h2>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:2rem;font-weight:300;">İspanyolcada fiiller nasıl çekilir?</p>
+
+  <!-- TAB BAR -->
+  <div class="gtab-bar">
+    <button class="gtab active" data-tab="endings" onclick="switchTab(this,'endings')">Ekler</button>
+    <button class="gtab" data-tab="tenses" onclick="switchTab(this,'tenses')">Zamanlar</button>
+    <button class="gtab" data-tab="irregular" onclick="switchTab(this,'irregular')">Düzensiz</button>
+    <button class="gtab" data-tab="pronouns" onclick="switchTab(this,'pronouns')">Şahıslar</button>
+  </div>
+
+  <!-- TAB: EK KURALLARI -->
+  <div class="gtab-content active" id="tab-endings">
+    <p class="g-intro">İspanyolcada fiiller mastar ekine göre üç gruba ayrılır. Her grubun geniş zamanda farklı ekleri vardır.</p>
+
+    <div class="g-group-card ar">
+      <div class="g-group-title">-AR Fiilleri</div>
+      <div class="g-group-ex">hablar, trabajar, comprar, caminar</div>
+      <table class="g-table">
+        <tr><th>Şahıs</th><th>Ek</th><th>Örnek (hablar)</th></tr>
+        <tr><td>yo</td><td>-<strong>o</strong></td><td>habl<strong>o</strong></td></tr>
+        <tr><td>tú</td><td>-<strong>as</strong></td><td>habl<strong>as</strong></td></tr>
+        <tr><td>él/ella</td><td>-<strong>a</strong></td><td>habl<strong>a</strong></td></tr>
+        <tr><td>nosotros</td><td>-<strong>amos</strong></td><td>habl<strong>amos</strong></td></tr>
+        <tr><td>vosotros</td><td>-<strong>áis</strong></td><td>habl<strong>áis</strong></td></tr>
+        <tr><td>ellos</td><td>-<strong>an</strong></td><td>habl<strong>an</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="g-group-card er">
+      <div class="g-group-title">-ER Fiilleri</div>
+      <div class="g-group-ex">comer, beber, entender, leer</div>
+      <table class="g-table">
+        <tr><th>Şahıs</th><th>Ek</th><th>Örnek (comer)</th></tr>
+        <tr><td>yo</td><td>-<strong>o</strong></td><td>com<strong>o</strong></td></tr>
+        <tr><td>tú</td><td>-<strong>es</strong></td><td>com<strong>es</strong></td></tr>
+        <tr><td>él/ella</td><td>-<strong>e</strong></td><td>com<strong>e</strong></td></tr>
+        <tr><td>nosotros</td><td>-<strong>emos</strong></td><td>com<strong>emos</strong></td></tr>
+        <tr><td>vosotros</td><td>-<strong>éis</strong></td><td>com<strong>éis</strong></td></tr>
+        <tr><td>ellos</td><td>-<strong>en</strong></td><td>com<strong>en</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="g-group-card ir">
+      <div class="g-group-title">-IR Fiilleri</div>
+      <div class="g-group-ex">vivir, escribir, abrir, salir</div>
+      <table class="g-table">
+        <tr><th>Şahıs</th><th>Ek</th><th>Örnek (vivir)</th></tr>
+        <tr><td>yo</td><td>-<strong>o</strong></td><td>viv<strong>o</strong></td></tr>
+        <tr><td>tú</td><td>-<strong>es</strong></td><td>viv<strong>es</strong></td></tr>
+        <tr><td>él/ella</td><td>-<strong>e</strong></td><td>viv<strong>e</strong></td></tr>
+        <tr><td>nosotros</td><td>-<strong>imos</strong></td><td>viv<strong>imos</strong></td></tr>
+        <tr><td>vosotros</td><td>-<strong>ís</strong></td><td>viv<strong>ís</strong></td></tr>
+        <tr><td>ellos</td><td>-<strong>en</strong></td><td>viv<strong>en</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="g-tip">
+      <span class="g-tip-icon">💡</span>
+      <span><strong>yo</strong> şahsı her üç grupta da <strong>-o</strong> ekini alır. -er ve -ir fiillerinin büyük çoğunluğu aynı ekleri kullanır — yalnızca nosotros ve vosotros farklılık gösterir.</span>
+    </div>
+  </div>
+
+  <!-- TAB: ZAMANLAR -->
+  <div class="gtab-content" id="tab-tenses">
+    <p class="g-intro">İspanyolcada üç temel zaman vardır. Hangisini ne zaman kullanacağını bilmek çok önemlidir.</p>
+
+    <div class="g-tense-card present">
+      <div class="g-tense-header">
+        <div class="g-tense-name">Presente</div>
+        <div class="g-tense-tr">Geniş Zaman</div>
+      </div>
+      <div class="g-tense-body">
+        <div class="g-when-label">Ne zaman kullanılır?</div>
+        <ul class="g-when-list">
+          <li>Şu an yapılan eylemler → <em>Estoy comiendo.</em></li>
+          <li>Alışkanlıklar → <em>Siempre desayuno en casa.</em></li>
+          <li>Genel gerçekler → <em>El sol sale por el este.</em></li>
+          <li>Yakın gelecek → <em>Mañana voy al médico.</em></li>
+        </ul>
+        <div class="g-tense-ex-label">Örnek çekim — hablar</div>
+        <div class="g-mini-conj">hablo · hablas · habla · hablamos · habláis · hablan</div>
+      </div>
+    </div>
+
+    <div class="g-tense-card preterito">
+      <div class="g-tense-header">
+        <div class="g-tense-name">Pretérito Indefinido</div>
+        <div class="g-tense-tr">Geçmiş Zaman</div>
+      </div>
+      <div class="g-tense-body">
+        <div class="g-when-label">Ne zaman kullanılır?</div>
+        <ul class="g-when-list">
+          <li>Tamamlanmış tek seferlik eylemler → <em>Ayer fui al médico.</em></li>
+          <li>Belirli bir geçmiş anda olan olaylar → <em>En 2020 empecé a estudiar.</em></li>
+          <li>Ardışık geçmiş eylemler → <em>Llegué, comí y me fui.</em></li>
+        </ul>
+        <div class="g-tense-ex-label">Örnek çekim — hablar</div>
+        <div class="g-mini-conj">hablé · hablaste · habló · hablamos · hablasteis · hablaron</div>
+      </div>
+    </div>
+
+    <div class="g-tense-card futuro">
+      <div class="g-tense-header">
+        <div class="g-tense-name">Futuro Simple</div>
+        <div class="g-tense-tr">Gelecek Zaman</div>
+      </div>
+      <div class="g-tense-body">
+        <div class="g-when-label">Ne zaman kullanılır?</div>
+        <ul class="g-when-list">
+          <li>Gelecekteki eylem ve planlar → <em>Mañana hablaré con él.</em></li>
+          <li>Tahminler → <em>Creo que lloverá.</em></li>
+          <li>Söz ve taahhütler → <em>Te llamaré esta noche.</em></li>
+        </ul>
+        <div class="g-tense-ex-label">Örnek çekim — hablar</div>
+        <div class="g-mini-conj">hablaré · hablarás · hablará · hablaremos · hablaréis · hablarán</div>
+      </div>
+    </div>
+
+    <div class="g-tip">
+      <span class="g-tip-icon">💡</span>
+      <span>Günlük İspanyolcada gelecek için çoğunlukla <strong>ir + a + infinitivo</strong> kullanılır: <em>Voy a hablar contigo.</em> Futuro simple daha resmi veya tahmini bir tondur.</span>
+    </div>
+  </div>
+
+  <!-- TAB: DÜZENSİZ FİİLLER -->
+  <div class="gtab-content" id="tab-irregular">
+    <p class="g-intro">En sık kullanılan fiillerin büyük çoğunluğu düzensizdir. Bunları ezberlemek şart!</p>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">ser <span class="g-irreg-tr">olmak (kalıcı)</span></div>
+      <div class="g-irreg-note">En düzensiz fiil — presente ve pretérito tamamen farklı!</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          soy · eres · es<br>somos · sois · son
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          fui · fuiste · fue<br>fuimos · fuisteis · fueron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          seré · serás · será<br>seremos · seréis · serán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">estar <span class="g-irreg-tr">olmak (geçici)</span></div>
+      <div class="g-irreg-note">yo → estoy (dikkat: -oy eki!)</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          estoy · estás · está<br>estamos · estáis · están
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          estuve · estuviste · estuvo<br>estuvimos · estuvisteis · estuvieron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          estaré · estarás · estará<br>estaremos · estaréis · estarán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">ir <span class="g-irreg-tr">gitmek</span></div>
+      <div class="g-irreg-note">Pretérito, ser ile tamamen aynı: fui, fuiste, fue…</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          voy · vas · va<br>vamos · vais · van
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          fui · fuiste · fue<br>fuimos · fuisteis · fueron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          iré · irás · irá<br>iremos · iréis · irán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">tener <span class="g-irreg-tr">sahip olmak</span></div>
+      <div class="g-irreg-note">yo → tengo; futuro kökü değişir: tendr-</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          tengo · tienes · tiene<br>tenemos · tenéis · tienen
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          tuve · tuviste · tuvo<br>tuvimos · tuvisteis · tuvieron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          tendré · tendrás · tendrá<br>tendremos · tendréis · tendrán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">poder <span class="g-irreg-tr">yapabilmek</span></div>
+      <div class="g-irreg-note">o→ue kök değişimi (yo hariç); futuro: podr-</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          puedo · puedes · puede<br>podemos · podéis · pueden
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          pude · pudiste · pudo<br>pudimos · pudisteis · pudieron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          podré · podrás · podrá<br>podremos · podréis · podrán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-irreg-card">
+      <div class="g-irreg-verb">querer <span class="g-irreg-tr">istemek / sevmek</span></div>
+      <div class="g-irreg-note">e→ie kök değişimi; futuro: querr-</div>
+      <div class="g-three-tenses">
+        <div class="g-tense-col">
+          <div class="g-col-label">Presente</div>
+          quiero · quieres · quiere<br>queremos · queréis · quieren
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Pretérito</div>
+          quise · quisiste · quiso<br>quisimos · quisisteis · quisieron
+        </div>
+        <div class="g-tense-col">
+          <div class="g-col-label">Futuro</div>
+          querré · querrás · querrá<br>querremos · querréis · querrán
+        </div>
+      </div>
+    </div>
+
+    <div class="g-tip">
+      <span class="g-tip-icon">💡</span>
+      <span>Kök değişimi olan fiillerde <strong>nosotros ve vosotros</strong> şahısları genellikle değişmez: poder → podemos (pued- değil). Bu kalıba "boot verb" denir çünkü değişen şahıslar bir çizme şekli oluşturur.</span>
+    </div>
+  </div>
+
+  <!-- TAB: ŞAHISLAR -->
+  <div class="gtab-content" id="tab-pronouns">
+    <p class="g-intro">İspanyolcada 6 şahıs vardır. Fiil çekimi şahsı zaten gösterdiğinden, zamirler çoğunlukla kullanılmaz.</p>
+
+    <div class="g-pronoun-grid">
+      <div class="g-pronoun-card yo">
+        <div class="g-pron-es">yo</div>
+        <div class="g-pron-tr">ben</div>
+        <div class="g-pron-note">Sadece vurgu için kullanılır</div>
+      </div>
+      <div class="g-pronoun-card tu">
+        <div class="g-pron-es">tú</div>
+        <div class="g-pron-tr">sen</div>
+        <div class="g-pron-note">Dikkat: aksan işareti var (tu = senin)</div>
+      </div>
+      <div class="g-pronoun-card el">
+        <div class="g-pron-es">él / ella / usted</div>
+        <div class="g-pron-tr">o / o (dişil) / siz (resmi)</div>
+        <div class="g-pron-note">Usted, él gibi çekilir ama saygı ifadesi</div>
+      </div>
+      <div class="g-pronoun-card nos">
+        <div class="g-pron-es">nosotros / nosotras</div>
+        <div class="g-pron-tr">biz</div>
+        <div class="g-pron-note">-as kadın grupları için</div>
+      </div>
+      <div class="g-pronoun-card vos">
+        <div class="g-pron-es">vosotros / vosotras</div>
+        <div class="g-pron-tr">siz</div>
+        <div class="g-pron-note">Yalnızca İspanya'da kullanılır</div>
+      </div>
+      <div class="g-pronoun-card ellos">
+        <div class="g-pron-es">ellos / ellas / ustedes</div>
+        <div class="g-pron-tr">onlar / onlar / siz (resmi çoğul)</div>
+        <div class="g-pron-note">Latin Amerika'da vosotros yerine ustedes</div>
+      </div>
+    </div>
+
+    <div class="g-tip">
+      <span class="g-tip-icon">💡</span>
+      <span>İspanyolcada <strong>fiil eki şahsı belirtir</strong>, bu yüzden <em>Hablo español</em> demek yeterlidir — <em>Yo hablo español</em> demek vurgu için kullanılır. Türkçeye benzer bir yapı!</span>
+    </div>
+
+    <div class="g-practice-btn-wrap">
+      <button class="start-btn" style="margin-top:1rem" onclick="goHome();setTimeout(()=>{document.querySelector('[data-cat=conjugation]').click();document.getElementById('start-btn').click();},100)">Çekim Pratiğine Geç →</button>
+    </div>
   </div>
 </div>
 
@@ -711,6 +1114,13 @@ function showScreen(id) {
 }
 
 function goHome() { showScreen('screen-home'); }
+
+function switchTab(el, tabId) {
+  document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.gtab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
 
 function startQuiz() {
   const pool = getPool();
