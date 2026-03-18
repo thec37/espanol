@@ -541,6 +541,9 @@
     <button class="cat-btn" data-cat="günlük" onclick="selectCat(this)">Günlük</button>
     <button class="cat-btn" data-cat="aile" onclick="selectCat(this)">Aile</button>
     <button class="cat-btn" data-cat="renk" onclick="selectCat(this)">Renkler</button>
+    <button class="cat-btn" data-cat="yiyecek" onclick="selectCat(this)">Yiyecek</button>
+    <button class="cat-btn" data-cat="sayı" onclick="selectCat(this)">Sayılar</button>
+    <button class="cat-btn" data-cat="conjugation" onclick="selectCat(this)">Fiil Çekimi</button>
   </div>
 
   <button class="start-btn" id="start-btn" onclick="startQuiz()" disabled style="opacity:0.6">Yükleniyor...</button>
@@ -693,6 +696,10 @@ function selectLevel(el) {
 }
 
 function getPool() {
+  if (currentCat === 'conjugation') {
+    let pool = currentLevel === 'all' ? WORDS : WORDS.filter(w => w.level === currentLevel);
+    return pool.filter(w => w.conjugations);
+  }
   let pool = currentLevel === 'all' ? WORDS : WORDS.filter(w => w.level === currentLevel);
   if (currentCat !== 'all') pool = pool.filter(w => w.cat === currentCat);
   return pool;
@@ -763,6 +770,11 @@ function showQuestion() {
 
   const container = document.getElementById('options-container');
   container.innerHTML = '';
+
+  if (currentCat === 'conjugation' && w.conjugations) {
+    showConjugationQuestion(w, container);
+    return;
+  }
 
   if (currentMode === 'fill') {
     const inp = document.createElement('input');
@@ -850,6 +862,39 @@ function setFeedback(isCorrect, hint) {
 function markStreak(i, isCorrect) {
   const dot = document.getElementById('dot-' + i);
   if (dot) dot.classList.add(isCorrect ? 'correct-dot' : 'wrong-dot');
+}
+
+function showConjugationQuestion(w, container) {
+  const tenses = ['presente','pretérito','futuro'];
+  const tenseLabels = {'presente':'Geniş Zaman','pretérito':'Geçmiş Zaman','futuro':'Gelecek Zaman'};
+  const pronouns = ['yo','tú','él','nosotros','vosotros','ellos'];
+  const pronounLabels = {'yo':'ben','tú':'sen','él':'o','nosotros':'biz','vosotros':'siz','ellos':'onlar'};
+  const tense = tenses[Math.floor(Math.random() * tenses.length)];
+  const pronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+  const correctAns = w.conjugations[tense][pronoun];
+
+  document.getElementById('dir-from').textContent = tenseLabels[tense];
+  document.getElementById('dir-to').textContent = pronounLabels[pronoun] + ' (' + pronoun + ')';
+  document.getElementById('q-cat').textContent = 'Fiil Çekimi';
+  document.getElementById('q-word').textContent = w.es + '  —  ' + w.tr;
+
+  const allForms = [];
+  WORDS.filter(x => x.conjugations && x.es !== w.es).forEach(x => {
+    const f = x.conjugations[tense]?.[pronoun];
+    if (f && f !== correctAns && !allForms.includes(f)) allForms.push(f);
+  });
+  const wrongs = allForms.sort(() => Math.random()-0.5).slice(0,3);
+  const opts = [correctAns, ...wrongs].sort(() => Math.random()-0.5);
+  const letters = ['A','B','C','D'];
+  const div = document.createElement('div'); div.className = 'options';
+  opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => checkOpt(btn, opt, correctAns);
+    div.appendChild(btn);
+  });
+  container.appendChild(div);
 }
 
 function nextQuestion() {
