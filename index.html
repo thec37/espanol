@@ -474,6 +474,8 @@
     color: var(--text);
   }
   .res-btn.primary { background: var(--accent); color: #0f0e17; border-color: var(--accent); font-weight: 500; }
+  #retry-wrong-btn { border-color: var(--accent2); color: var(--accent2); }
+  #retry-wrong-btn:hover { background: rgba(240,113,103,0.1); }
   .res-btn:hover { background: var(--surface); }
   .res-btn.primary:hover { opacity: 0.9; background: var(--accent); }
 
@@ -1047,23 +1049,29 @@
     <button class="res-btn" onclick="goHome()">Ana Sayfa</button>
     <button class="res-btn primary" onclick="restartSame()">Tekrar Dene</button>
   </div>
+  <button class="res-btn" id="retry-wrong-btn" onclick="retryWrong()" style="width:100%;margin-top:10px;display:none;">🔁 Yanlışları Tekrar Et (<span id="wrong-count">0</span> kelime)</button>
 </div>
 
 <script>
 let WORDS = [];
 
 async function loadWords() {
-  const res = await fetch('words.json');
-  WORDS = await res.json();
+  try {
+    const res = await fetch('words.json');
+    WORDS = await res.json();
+  } catch(e) {
+    // file:// protokolünde çalışmaz, uyarı göster
+    document.getElementById('start-btn').textContent = '⚠ Sunucu gerekli (GitHub Pages)';
+    return;
+  }
   initHome();
 }
 
 function initHome() {
   document.getElementById('start-btn').disabled = false;
-  document.getElementById('start-btn').textContent = 'Başla →'; document.getElementById('start-btn').style.opacity = '1';
+  document.getElementById('start-btn').textContent = 'Başla →';
+  document.getElementById('start-btn').style.opacity = '1';
 }
-
-loadWords();
 
 let currentMode = 'multiple';
 let currentLevel = 'A1';
@@ -1077,6 +1085,8 @@ let answered = false;
 let streakHistory = [];
 let isFlipped = false;
 let flashKnew = 0;
+let wrongWords = [];
+let isRetryRound = false;
 
 function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
 
@@ -1126,7 +1136,7 @@ function startQuiz() {
   const pool = getPool();
   if (pool.length < 4) { alert('Bu kategoride yeterli kelime yok!'); return; }
   queue = shuffle(pool).slice(0, Math.min(10, pool.length));
-  qIndex = 0; score = 0; correct = 0; wrong = 0; streakHistory = [];
+  qIndex = 0; score = 0; correct = 0; wrong = 0; streakHistory = []; wrongWords = []; isRetryRound = false;
 
   const levelLabel = currentLevel === 'all' ? 'Hepsi' : currentLevel;
   document.getElementById('level-badge').textContent = levelLabel;
@@ -1165,7 +1175,7 @@ function showQuestion() {
   document.getElementById('score-display').textContent = score;
   document.getElementById('prog-fill').style.width = `${((qIndex + 1) / queue.length) * 100}%`;
 
-  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  const catLabels = {fiil:'Fiil',isim:'İsim','sıfat':'Sıfat',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat',günlük:'Günlük',renk:'Renk',sayı:'Sayı',yiyecek:'Yiyecek',aile:'Aile','bağlaç':'Bağlaç',zarf:'Zarf','conjugation':'Fiil Çekimi'};
   document.getElementById('q-cat').textContent = catLabels[w.cat] || w.cat;
 
   if (isReverse) {
@@ -1182,6 +1192,10 @@ function showQuestion() {
   container.innerHTML = '';
 
   if (currentCat === 'conjugation' && w.conjugations) {
+    // conjugation modunda yön etiketlerini temizle, q-word showConjugationQuestion içinde set ediliyor
+    document.getElementById('dir-from').textContent = '';
+    document.getElementById('dir-to').textContent = '';
+    document.getElementById('q-word').textContent = '';
     showConjugationQuestion(w, container);
     return;
   }
@@ -1238,6 +1252,7 @@ function checkFill(inp, userVal, correctVal, display) {
     setFeedback(false, `Doğrusu: ${display}`);
     wrong++;
     markStreak(qIndex, false);
+    if (!isRetryRound) wrongWords.push(queue[qIndex]);
   }
   document.getElementById('score-display').textContent = score;
   document.getElementById('next-btn').classList.add('visible');
@@ -1258,6 +1273,7 @@ function checkOpt(btn, chosen, correctAns) {
     setFeedback(false, `Doğrusu: ${correctAns}`);
     wrong++;
     markStreak(qIndex, false);
+    if (!isRetryRound) wrongWords.push(queue[qIndex]);
   }
   document.getElementById('score-display').textContent = score;
   document.getElementById('next-btn').classList.add('visible');
@@ -1329,6 +1345,24 @@ function showResult() {
     const offset = circumference - (pct / 100) * circumference;
     document.getElementById('ring-fill').style.strokeDashoffset = offset;
   }, 200);
+  const retryBtn = document.getElementById('retry-wrong-btn');
+  if (wrongWords.length > 0 && !isRetryRound) {
+    document.getElementById('wrong-count').textContent = wrongWords.length;
+    retryBtn.style.display = 'block';
+  } else {
+    retryBtn.style.display = 'none';
+  }
+}
+
+function retryWrong() {
+  queue = shuffle([...wrongWords]);
+  qIndex = 0; score = 0; correct = 0; wrong = 0; streakHistory = [];
+  isRetryRound = true; wrongWords = [];
+  const levelLabel = currentLevel === 'all' ? 'Hepsi' : currentLevel;
+  document.getElementById('level-badge').textContent = levelLabel;
+  showScreen('screen-quiz');
+  buildStreakBar();
+  showQuestion();
 }
 
 function restartSame() { startQuiz(); }
@@ -1341,7 +1375,7 @@ function showFlashCard() {
   card.classList.remove('flipped');
   document.getElementById('flash-actions').style.display = 'none';
   const w = queue[qIndex];
-  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  const catLabels = {fiil:'Fiil',isim:'İsim','sıfat':'Sıfat',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat',günlük:'Günlük',renk:'Renk',sayı:'Sayı',yiyecek:'Yiyecek',aile:'Aile','bağlaç':'Bağlaç',zarf:'Zarf','conjugation':'Fiil Çekimi'};
   document.getElementById('flash-hint').textContent = 'Türkçe';
   document.getElementById('flash-word').textContent = w.tr;
   document.getElementById('flash-cat-el').textContent = catLabels[w.cat] || '';
@@ -1356,7 +1390,7 @@ function flipCard() {
   isFlipped = true;
   const card = document.getElementById('flashcard');
   const w = queue[qIndex];
-  const catLabels = {fiil:'Fiil',isim:'İsim',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat'};
+  const catLabels = {fiil:'Fiil',isim:'İsim','sıfat':'Sıfat',sifat:'Sıfat',zaman:'Zaman',seyahat:'Seyahat',günlük:'Günlük',renk:'Renk',sayı:'Sayı',yiyecek:'Yiyecek',aile:'Aile','bağlaç':'Bağlaç',zarf:'Zarf','conjugation':'Fiil Çekimi'};
   card.classList.add('flip-out');
   setTimeout(() => {
     card.classList.add('flipped');
@@ -1394,6 +1428,18 @@ function showFlashResult() {
     document.getElementById('ring-fill').style.strokeDashoffset = offset;
   }, 200);
 }
+
+loadWords();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    const nextBtn = document.getElementById('next-btn');
+    if (nextBtn && nextBtn.classList.contains('visible')) {
+      e.preventDefault();
+      nextQuestion();
+    }
+  }
+});
 </script>
 </body>
 </html>
