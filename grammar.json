@@ -1,0 +1,656 @@
+{
+  "levels": [
+    {
+      "id": "A1",
+      "label": "A1",
+      "color": "teal",
+      "topics": [
+        {
+          "id": "a1-pronouns",
+          "title": "Kişi Zamirleri",
+          "subtitle": "Pronouns",
+          "intro": "İspanyolcada 6 kişi zamiri vardır. Fiil eki kişiyi zaten belirttiğinden zamirler çoğunlukla kullanılmaz — Türkçeye benzer bir yapı.",
+          "tables": [
+            {
+              "headers": ["Zamir", "Türkçe", "Not"],
+              "rows": [
+                ["yo", "ben", "Sadece vurgu için kullanılır"],
+                ["tú", "sen", "Dikkat: aksan işareti var — tu = senin"],
+                ["él / ella / usted", "o / o / siz (resmi)", "Usted kısaca Ud. yazılır, él gibi çekilir"],
+                ["nosotros / nosotras", "biz", "-as dişil gruplar için"],
+                ["vosotros / vosotras", "siz", "Yalnızca İspanya'da kullanılır"],
+                ["ellos / ellas / ustedes", "onlar / onlar / siz (çoğul resmi)", "Latin Amerika'da vosotros yerine ustedes"]
+              ]
+            }
+          ],
+          "tips": ["İspanyolcada 'Hablo español' demek yeterli — 'Yo hablo español' vurgu içindir.", "Latin Amerika'da vosotros kullanılmaz, yerine ustedes denir."]
+        },
+        {
+          "id": "a1-presente",
+          "title": "Geniş Zaman",
+          "subtitle": "Presente de Indicativo",
+          "intro": "İspanyolcada fiiller mastar ekine göre üç gruba ayrılır: -AR, -ER, -IR. Her grubun farklı ekleri vardır.",
+          "tables": [
+            {
+              "label": "-AR Fiilleri — hablar (konuşmak)",
+              "accent": "yellow",
+              "headers": ["Kişi", "Ek", "Örnek"],
+              "rows": [
+                ["yo", "-o", "hablo"],
+                ["tú", "-as", "hablas"],
+                ["él/ella", "-a", "habla"],
+                ["nosotros", "-amos", "hablamos"],
+                ["vosotros", "-áis", "habláis"],
+                ["ellos", "-an", "hablan"]
+              ]
+            },
+            {
+              "label": "-ER Fiilleri — comer (yemek yemek)",
+              "accent": "blue",
+              "headers": ["Kişi", "Ek", "Örnek"],
+              "rows": [
+                ["yo", "-o", "como"],
+                ["tú", "-es", "comes"],
+                ["él/ella", "-e", "come"],
+                ["nosotros", "-emos", "comemos"],
+                ["vosotros", "-éis", "coméis"],
+                ["ellos", "-en", "comen"]
+              ]
+            },
+            {
+              "label": "-IR Fiilleri — vivir (yaşamak)",
+              "accent": "coral",
+              "headers": ["Kişi", "Ek", "Örnek"],
+              "rows": [
+                ["yo", "-o", "vivo"],
+                ["tú", "-es", "vives"],
+                ["él/ella", "-e", "vive"],
+                ["nosotros", "-imos", "vivimos"],
+                ["vosotros", "-ís", "vivís"],
+                ["ellos", "-en", "viven"]
+              ]
+            }
+          ],
+          "tips": ["yo şahsı her üç grupta da -o ekini alır.", "-ER ve -IR farkı sadece nosotros ve vosotros şahıslarındadır."]
+        },
+        {
+          "id": "a1-ser-estar",
+          "title": "Ser ve Estar",
+          "subtitle": "İki 'olmak' fiili",
+          "intro": "İspanyolcada iki ayrı 'olmak' fiili vardır. Ser kalıcı özellikler, estar geçici durumlar için kullanılır.",
+          "tables": [
+            {
+              "label": "ser — kalıcı özellikler",
+              "accent": "yellow",
+              "headers": ["Kişi", "Ser", "Estar"],
+              "rows": [
+                ["yo", "soy", "estoy"],
+                ["tú", "eres", "estás"],
+                ["él/ella", "es", "está"],
+                ["nosotros", "somos", "estamos"],
+                ["vosotros", "sois", "estáis"],
+                ["ellos", "son", "están"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Soy estudiante.", "tr": "Öğrenciyim. (meslek — kalıcı → ser)"},
+            {"es": "Estoy cansado.", "tr": "Yorgunum. (geçici durum → estar)"},
+            {"es": "Madrid es grande.", "tr": "Madrid büyük. (kalıcı özellik → ser)"},
+            {"es": "El café está frío.", "tr": "Kahve soğuk. (geçici durum → estar)"}
+          ],
+          "tips": ["SER: kimlik, meslek, köken, malzeme, sahiplik, zaman", "ESTAR: konum, durum, duygu, sağlık, geçici özellikler"]
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "label": "A2",
+      "color": "blue",
+      "topics": [
+        {
+          "id": "a2-preterito",
+          "title": "Geçmiş Zaman",
+          "subtitle": "Pretérito Indefinido",
+          "intro": "Tamamlanmış, tek seferlik geçmiş eylemler için kullanılır. 'Dün markete gittim' gibi belirli bir geçmiş anı ifade eder.",
+          "tables": [
+            {
+              "label": "-AR — hablar",
+              "accent": "yellow",
+              "headers": ["Kişi", "Çekim"],
+              "rows": [
+                ["yo", "hablé"],
+                ["tú", "hablaste"],
+                ["él/ella", "habló"],
+                ["nosotros", "hablamos"],
+                ["vosotros", "hablasteis"],
+                ["ellos", "hablaron"]
+              ]
+            },
+            {
+              "label": "-ER/-IR — comer / vivir",
+              "accent": "blue",
+              "headers": ["Kişi", "comer", "vivir"],
+              "rows": [
+                ["yo", "comí", "viví"],
+                ["tú", "comiste", "viviste"],
+                ["él/ella", "comió", "vivió"],
+                ["nosotros", "comimos", "vivimos"],
+                ["vosotros", "comisteis", "vivisteis"],
+                ["ellos", "comieron", "vivieron"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Ayer fui al médico.", "tr": "Dün doktora gittim."},
+            {"es": "Llegué, comí y me fui.", "tr": "Geldim, yedim ve gittim."},
+            {"es": "En 2020 empecé a estudiar español.", "tr": "2020'de İspanyolca öğrenmeye başladım."}
+          ],
+          "tips": ["Belirli zaman ifadelerle gelir: ayer, el lunes pasado, en 2020, hace dos años", "ser ve ir'in pretéritoso aynıdır: fui, fuiste, fue..."]
+        },
+        {
+          "id": "a2-hay",
+          "title": "Hay / Está(n)",
+          "subtitle": "Var ve Nerede",
+          "intro": "Hay varlık belirtir ('var'), está/están ise konum belirtir ('burada/orada').",
+          "examples": [
+            {"es": "Hay un banco cerca.", "tr": "Yakında bir banka var."},
+            {"es": "¿Hay leche en la nevera?", "tr": "Buzdolabında süt var mı?"},
+            {"es": "El banco está en la calle Mayor.", "tr": "Banka ana caddede."},
+            {"es": "¿Dónde está el hotel?", "tr": "Otel nerede?"}
+          ],
+          "tips": ["Hay her zaman tekil çekilir — hay una persona, hay dos personas (habrá personas değil hay personas)", "Está/están bilinen, belirli bir şeyin konumu için; hay belirsiz varlık için"]
+        },
+        {
+          "id": "a2-gustar",
+          "title": "Gustar Yapısı",
+          "subtitle": "Beğenmek / Hoşlanmak",
+          "intro": "gustar ve benzer fiiller (encantar, molestar, doler...) Türkçeden farklı çalışır — özne ile nesne yer değiştirir.",
+          "tables": [
+            {
+              "label": "Dolaylı nesne zamirleri",
+              "accent": "teal",
+              "headers": ["Kişi", "Zamir", "Örnek"],
+              "rows": [
+                ["ben", "me", "Me gusta el café."],
+                ["sen", "te", "Te gustan los libros."],
+                ["o/siz(resmi)", "le", "Le encanta bailar."],
+                ["biz", "nos", "Nos gusta viajar."],
+                ["siz", "os", "Os molesta el ruido."],
+                ["onlar", "les", "Les duele la cabeza."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Me gusta el fútbol.", "tr": "Futbol hoşuma gidiyor. (tekil → gusta)"},
+            {"es": "Me gustan los gatos.", "tr": "Kediler hoşuma gidiyor. (çoğul → gustan)"},
+            {"es": "A María le encanta bailar.", "tr": "María dansı çok seviyor."}
+          ],
+          "tips": ["Özne (beğenilen şey) tekil ise 'gusta', çoğul ise 'gustan'", "A + kişi adı ekleyerek vurgulayabilirsin: A mí me gusta..."]
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "label": "B1",
+      "color": "coral",
+      "topics": [
+        {
+          "id": "b1-imperativo",
+          "title": "Emir Kipi",
+          "subtitle": "Imperativo",
+          "intro": "Emir, öneri veya talimat vermek için kullanılır. Olumlu ve olumsuz formları farklı çekilir.",
+          "tables": [
+            {
+              "label": "Olumlu emir (hablar / comer / vivir)",
+              "accent": "yellow",
+              "headers": ["Kişi", "hablar", "comer", "vivir"],
+              "rows": [
+                ["tú", "habla", "come", "vive"],
+                ["él/usted", "hable", "coma", "viva"],
+                ["nosotros", "hablemos", "comamos", "vivamos"],
+                ["vosotros", "hablad", "comed", "vivid"],
+                ["ellos/ustedes", "hablen", "coman", "vivan"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "¡Habla más despacio!", "tr": "Daha yavaş konuş!"},
+            {"es": "Come la sopa.", "tr": "Çorbayı ye."},
+            {"es": "¡No hables tan rápido!", "tr": "Bu kadar hızlı konuşma!"},
+            {"es": "Por favor, no fumes aquí.", "tr": "Lütfen burada sigara içme."}
+          ],
+          "tips": ["Olumsuz emir için 'no + subjuntivo presente' kullanılır", "Düzensiz emirler: ser→sé, ir→ve, tener→ten, hacer→haz, decir→di"]
+        },
+        {
+          "id": "b1-reflexivos",
+          "title": "Dönüşlü Fiiller",
+          "subtitle": "Verbos Reflexivos",
+          "intro": "Eylemin özne üzerinde gerçekleştiğini gösterir. Türkçe'deki '-in-/-ın-' eklerine benzer.",
+          "tables": [
+            {
+              "label": "levantarse (kalkmak) çekimi",
+              "accent": "blue",
+              "headers": ["Kişi", "Zamir", "Fiil"],
+              "rows": [
+                ["yo", "me", "me levanto"],
+                ["tú", "te", "te levantas"],
+                ["él/ella", "se", "se levanta"],
+                ["nosotros", "nos", "nos levantamos"],
+                ["vosotros", "os", "os levantáis"],
+                ["ellos", "se", "se levantan"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Me llamo Carlos.", "tr": "Adım Carlos."},
+            {"es": "Me levanto a las siete.", "tr": "Yedide kalkıyorum."},
+            {"es": "Se ducha por la mañana.", "tr": "Sabahları duş alıyor."},
+            {"es": "Nos acostamos tarde.", "tr": "Geç yatıyoruz."}
+          ],
+          "tips": ["Infinitivo sonda -se ile biter: llamarse, levantarse, ducharse", "Zamir fiilden önce gelir: me levanto (ayrı), kalmadan önce: voy a levantarme"]
+        },
+        {
+          "id": "b1-futuro",
+          "title": "Gelecek Zaman",
+          "subtitle": "Futuro Simple",
+          "intro": "Gelecekteki eylemler, tahminler ve söz vermek için kullanılır. Türkçe'deki '-ecek/-acak' ekine karşılık gelir.",
+          "tables": [
+            {
+              "label": "Düzenli fiiller — infinitivo + ek",
+              "accent": "teal",
+              "headers": ["Kişi", "hablar", "comer", "vivir"],
+              "rows": [
+                ["yo", "hablaré", "comeré", "viviré"],
+                ["tú", "hablarás", "comerás", "vivirás"],
+                ["él/ella", "hablará", "comerá", "vivirá"],
+                ["nosotros", "hablaremos", "comeremos", "viviremos"],
+                ["vosotros", "hablaréis", "comeréis", "viviréis"],
+                ["ellos", "hablarán", "comerán", "vivirán"]
+              ]
+            },
+            {
+              "label": "Düzensiz kökler",
+              "accent": "coral",
+              "headers": ["Fiil", "Kök", "Örnek (yo)"],
+              "rows": [
+                ["tener", "tendr-", "tendré"],
+                ["poder", "podr-", "podré"],
+                ["querer", "querr-", "querré"],
+                ["hacer", "har-", "haré"],
+                ["decir", "dir-", "diré"],
+                ["salir", "saldr-", "saldré"],
+                ["venir", "vendr-", "vendré"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Mañana hablaré con él.", "tr": "Yarın onunla konuşacağım."},
+            {"es": "Creo que lloverá.", "tr": "Yağmur yağacağını düşünüyorum."},
+            {"es": "Te llamaré esta noche.", "tr": "Bu gece seni arayacağım."}
+          ],
+          "tips": ["Günlük dilde gelecek için çoğunlukla ir+a+infinitivo kullanılır: Voy a hablar contigo.", "Futuro simple daha resmi veya tahmini bir ton taşır."]
+        },
+        {
+          "id": "b1-comparative",
+          "title": "Karşılaştırma",
+          "subtitle": "Comparativos y Superlativos",
+          "intro": "İspanyolcada karşılaştırma más/menos...que yapısıyla, üstünlük ise el/la más/menos yapısıyla kurulur.",
+          "tables": [
+            {
+              "label": "Karşılaştırma yapıları",
+              "accent": "yellow",
+              "headers": ["Tür", "Yapı", "Örnek"],
+              "rows": [
+                ["Üstünlük", "más + adj + que", "Es más alto que yo."],
+                ["Eksiklik", "menos + adj + que", "Es menos caro que el otro."],
+                ["Eşitlik", "tan + adj + como", "Es tan inteligente como tú."],
+                ["Miktar eşitliği", "tanto/a/os/as + n + como", "Tiene tantos libros como yo."]
+              ]
+            },
+            {
+              "label": "Düzensiz karşılaştırma",
+              "accent": "blue",
+              "headers": ["Sıfat", "Karşılaştırma", "Üstünlük"],
+              "rows": [
+                ["bueno (iyi)", "mejor (daha iyi)", "el mejor (en iyi)"],
+                ["malo (kötü)", "peor (daha kötü)", "el peor (en kötü)"],
+                ["grande (büyük)", "mayor (daha büyük/yaşlı)", "el mayor"],
+                ["pequeño (küçük)", "menor (daha küçük/genç)", "el menor"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Este libro es más interesante que el otro.", "tr": "Bu kitap diğerinden daha ilginç."},
+            {"es": "Habla tan rápido como un nativo.", "tr": "Bir ana dili konuşucusu kadar hızlı konuşuyor."},
+            {"es": "Es el mejor restaurante de la ciudad.", "tr": "Şehrin en iyi restoranı."}
+          ],
+          "tips": ["mejor/peor hem sıfat hem zarf olarak kullanılır", "más bueno/más malo yerine mejor/peor tercih edilir"]
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "label": "B2",
+      "color": "purple",
+      "topics": [
+        {
+          "id": "b2-subjuntivo",
+          "title": "Dilek Kipi",
+          "subtitle": "Presente de Subjuntivo",
+          "intro": "Subjuntivo gerçek olmayan, istenen, şüpheli veya duygusal ifadeler için kullanılır. İspanyolcanın en zorlu konularından biridir.",
+          "tables": [
+            {
+              "label": "Oluşumu — yo presente'den",
+              "accent": "purple",
+              "headers": ["Fiil", "yo (presente)", "Subjuntivo kökü", "yo (subj.)"],
+              "rows": [
+                ["hablar", "hablo", "habl-", "hable"],
+                ["comer", "como", "com-", "coma"],
+                ["vivir", "vivo", "viv-", "viva"],
+                ["tener", "tengo", "teng-", "tenga"],
+                ["hacer", "hago", "hag-", "haga"],
+                ["conocer", "conozco", "conozc-", "conozca"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Quiero que vengas.", "tr": "Gelmeni istiyorum."},
+            {"es": "Es importante que estudies.", "tr": "Çalışman önemli."},
+            {"es": "No creo que sea verdad.", "tr": "Doğru olduğuna inanmıyorum."},
+            {"es": "Cuando llegues, llámame.", "tr": "Geldiğinde beni ara."}
+          ],
+          "tips": ["Tetikleyici yapılar: querer que, esperar que, es importante que, no creer que", "que'den sonra farklı özne varsa subjuntivo gelir: Quiero que tú vengas (ben istiyorum, sen gel)"]
+        },
+        {
+          "id": "b2-passive",
+          "title": "Edilgen Çatı",
+          "subtitle": "Voz Pasiva",
+          "intro": "İspanyolcada edilgenlik iki farklı yapıyla ifade edilir: ser+participio (klasik pasif) ve se pasiva (daha yaygın).",
+          "tables": [
+            {
+              "label": "ser + participio",
+              "accent": "coral",
+              "headers": ["Zaman", "Yapı", "Örnek"],
+              "rows": [
+                ["Presente", "es + participio", "El libro es escrito por el autor."],
+                ["Pretérito", "fue + participio", "La carta fue escrita ayer."],
+                ["Futuro", "será + participio", "El informe será publicado mañana."]
+              ]
+            },
+            {
+              "label": "se pasiva — daha yaygın",
+              "accent": "blue",
+              "headers": ["Yapı", "Örnek", "Türkçe"],
+              "rows": [
+                ["se + tekil fiil", "Se vende piso.", "Daire satılıyor."],
+                ["se + çoğul fiil", "Se alquilan habitaciones.", "Odalar kiraya veriliyor."],
+                ["se + fiil", "Se habla español aquí.", "Burada İspanyolca konuşuluyor."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "La novela fue escrita en 1960.", "tr": "Roman 1960'ta yazıldı."},
+            {"es": "Se prohíbe fumar.", "tr": "Sigara içmek yasaktır."},
+            {"es": "En España se cena tarde.", "tr": "İspanya'da akşam yemeği geç yenir."}
+          ],
+          "tips": ["se pasiva günlük dilde çok daha yaygındır", "ser+participio genellikle eylemci (por...) belirtildiğinde kullanılır"]
+        },
+        {
+          "id": "b2-imperfecto",
+          "title": "Geçmişte Süreklilik",
+          "subtitle": "Pretérito Imperfecto",
+          "intro": "Geçmişte alışkanlık, süregelen durum veya fon bilgisi vermek için kullanılır. Pretérito indefinido ile farkını bilmek kritiktir.",
+          "tables": [
+            {
+              "label": "Çekim (-AR / -ER,-IR)",
+              "accent": "blue",
+              "headers": ["Kişi", "-AR (hablar)", "-ER/-IR (comer)"],
+              "rows": [
+                ["yo", "hablaba", "comía"],
+                ["tú", "hablabas", "comías"],
+                ["él/ella", "hablaba", "comía"],
+                ["nosotros", "hablábamos", "comíamos"],
+                ["vosotros", "hablabais", "comíais"],
+                ["ellos", "hablaban", "comían"]
+              ]
+            },
+            {
+              "label": "Indefinido vs Imperfecto",
+              "accent": "yellow",
+              "headers": ["Imperfecto", "Indefinido"],
+              "rows": [
+                ["Alışkanlık: Siempre comía aquí.", "Tek sefer: Ayer comí aquí."],
+                ["Fon: Llovía mucho.", "Olay: De repente llegó."],
+                ["Süregelen durum: Era alto.", "Tamamlanmış değişim: Se puso alto."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Cuando era niño, jugaba al fútbol.", "tr": "Çocukken futbol oynardım."},
+            {"es": "Todos los días iba al trabajo en metro.", "tr": "Her gün metroyla işe giderdim."},
+            {"es": "Mientras dormía, sonó el teléfono.", "tr": "Uyurken telefon çaldı."}
+          ],
+          "tips": ["Imperfecto için sinyal kelimeler: siempre, todos los días, antes, de niño, normalmente", "Sadece 3 düzensiz fiil: ser (era), ir (iba), ver (veía)"]
+        },
+        {
+          "id": "b2-modal",
+          "title": "Modal Fiiller",
+          "subtitle": "Verbos Modales",
+          "intro": "İspanyolcada İngilizce gibi ayrı modal fiiller yoktur; bunun yerine belirli yapılar kullanılır.",
+          "tables": [
+            {
+              "label": "Modal yapılar",
+              "accent": "teal",
+              "headers": ["Anlam", "Yapı", "Örnek"],
+              "rows": [
+                ["Zorunluluk (genel)", "hay que + inf.", "Hay que estudiar más."],
+                ["Zorunluluk (kişisel)", "tener que + inf.", "Tengo que trabajar."],
+                ["Gereklilik/tavsiye", "deber + inf.", "Debes descansar."],
+                ["Olasılık", "poder + inf.", "Puede que llueva."],
+                ["İzin istemek", "¿puedo + inf.?", "¿Puedo salir?"],
+                ["Öneri", "poder + inf.", "Puedes intentarlo."],
+                ["İstek/arzulama", "querer + inf.", "Quiero aprender más."],
+                ["Yakın gelecek", "ir a + inf.", "Voy a estudiar esta tarde."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Hay que respetar las normas.", "tr": "Kurallara uymak gerekir."},
+            {"es": "Deberías comer menos azúcar.", "tr": "Daha az şeker yemelisin."},
+            {"es": "No puedo dormir bien últimamente.", "tr": "Son zamanlarda iyi uyuyamıyorum."}
+          ],
+          "tips": ["tener que kişisel zorunluluk, hay que genel kural için", "deber'in koşullu hali (debería) daha kibar bir tavsiye ifade eder"]
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "label": "C1",
+      "color": "amber",
+      "topics": [
+        {
+          "id": "c1-subjuntivo-pasado",
+          "title": "Geçmiş Dilek Kipi",
+          "subtitle": "Pretérito Perfecto e Imperfecto de Subjuntivo",
+          "intro": "Geçmişe yönelik dilek, şüphe veya duygusal ifadeler için kullanılır.",
+          "tables": [
+            {
+              "label": "Imperfecto de subjuntivo (-ra formu)",
+              "accent": "amber",
+              "headers": ["Kişi", "hablar", "tener", "ir/ser"],
+              "rows": [
+                ["yo", "hablara", "tuviera", "fuera"],
+                ["tú", "hablaras", "tuvieras", "fueras"],
+                ["él/ella", "hablara", "tuviera", "fuera"],
+                ["nosotros", "habláramos", "tuviéramos", "fuéramos"],
+                ["vosotros", "hablarais", "tuvierais", "fuerais"],
+                ["ellos", "hablaran", "tuvieran", "fueran"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Quería que vinieras.", "tr": "Gelmeni istiyordum."},
+            {"es": "Si tuviera dinero, viajaría.", "tr": "Param olsaydı, seyahat ederdim."},
+            {"es": "Era imposible que lo supiera.", "tr": "Bunu bilmesi imkânsızdı."}
+          ],
+          "tips": ["imperfecto de subjuntivo, -ra veya -se formuyla kullanılabilir; -ra daha yaygın", "si + imperfecto subj. → condicional yapısı: gerçek dışı koşullar için"]
+        },
+        {
+          "id": "c1-condicional",
+          "title": "Koşul Kipi",
+          "subtitle": "Condicional Simple",
+          "intro": "Koşullu durumlar, nazik ricalar ve geçmişe yönelik gelecek ifadeler için kullanılır.",
+          "tables": [
+            {
+              "label": "Düzenli fiiller — infinitivo + ek",
+              "accent": "blue",
+              "headers": ["Kişi", "Ek", "hablar", "tener"],
+              "rows": [
+                ["yo", "-ía", "hablaría", "tendría"],
+                ["tú", "-ías", "hablarías", "tendrías"],
+                ["él/ella", "-ía", "hablaría", "tendría"],
+                ["nosotros", "-íamos", "hablaríamos", "tendríamos"],
+                ["vosotros", "-íais", "hablaríais", "tendríais"],
+                ["ellos", "-ían", "hablarían", "tendrían"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "¿Podrías ayudarme?", "tr": "Bana yardım edebilir misin? (nazik rica)"},
+            {"es": "Si fuera rico, viajaría por el mundo.", "tr": "Zengin olsaydım, dünyayı gezerdim."},
+            {"es": "Dijo que vendría mañana.", "tr": "Yarın geleceğini söyledi. (geçmişe yönelik gelecek)"}
+          ],
+          "tips": ["Futuro ile aynı düzensiz kökler: tendr-, podr-, querr-, har-...", "Condicional + imperfecto de subjuntivo: gerçek dışı koşul cümleleri"]
+        },
+        {
+          "id": "c1-participio-gerundio",
+          "title": "Ortaç ve Ulaç",
+          "subtitle": "Participio y Gerundio",
+          "intro": "Participio tamamlanmışlık, gerundio ise süregelen eylem ifadesi için kullanılır. İkisi birçok bileşik zamanda temel rol oynar.",
+          "tables": [
+            {
+              "label": "Oluşumu",
+              "accent": "teal",
+              "headers": ["Tür", "Yapı", "Örnek"],
+              "rows": [
+                ["Participio (-AR)", "-ado", "hablado, trabajado"],
+                ["Participio (-ER/-IR)", "-ido", "comido, vivido"],
+                ["Gerundio (-AR)", "-ando", "hablando, trabajando"],
+                ["Gerundio (-ER/-IR)", "-iendo", "comiendo, viviendo"]
+              ]
+            },
+            {
+              "label": "Düzensiz participiolar",
+              "accent": "coral",
+              "headers": ["Fiil", "Participio"],
+              "rows": [
+                ["hacer", "hecho"],
+                ["decir", "dicho"],
+                ["escribir", "escrito"],
+                ["ver", "visto"],
+                ["volver", "vuelto"],
+                ["abrir", "abierto"],
+                ["poner", "puesto"],
+                ["romper", "roto"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "He comido demasiado.", "tr": "Çok fazla yedim. (pretérito perfecto)"},
+            {"es": "Está hablando por teléfono.", "tr": "Telefonla konuşuyor. (estar + gerundio)"},
+            {"es": "Lleva tres horas estudiando.", "tr": "Üç saattir ders çalışıyor."}
+          ],
+          "tips": ["Pretérito perfecto = haber (he/has/ha...) + participio", "estar + gerundio = şu an devam eden eylem"]
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "label": "C2",
+      "color": "red",
+      "topics": [
+        {
+          "id": "c2-estilo-indirecto",
+          "title": "Dolaylı Anlatım",
+          "subtitle": "Estilo Indirecto",
+          "intro": "Birinin söylediklerini aktarırken zamanlar ve zamirler sistematik olarak değişir.",
+          "tables": [
+            {
+              "label": "Zaman dönüşümleri",
+              "accent": "red",
+              "headers": ["Doğrudan", "Dolaylı (dijo que...)"],
+              "rows": [
+                ["Presente → hablo", "Imperfecto → hablaba"],
+                ["Pretérito indefinido → hablé", "Pluscuamperfecto → había hablado"],
+                ["Futuro → hablaré", "Condicional → hablaría"],
+                ["Imperativo → habla", "Imperfecto subj. → hablara"],
+                ["Presente subj. → hable", "Imperfecto subj. → hablara"]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "\"Estoy cansado\" → Dijo que estaba cansado.", "tr": "'Yorgunum' → Yorgun olduğunu söyledi."},
+            {"es": "\"Vendré mañana\" → Dijo que vendría al día siguiente.", "tr": "'Yarın geleceğim' → Ertesi gün geleceğini söyledi."},
+            {"es": "\"¡Ven aquí!\" → Le dijo que fuera allí.", "tr": "'Buraya gel!' → Oraya gitmesini söyledi."}
+          ],
+          "tips": ["mañana → al día siguiente, aquí → allí, este → aquel gibi zaman ve yer ifadeleri de değişir", "Bildirme fiili presente ise (dice que...) zaman dönüşümü gerekmez"]
+        },
+        {
+          "id": "c2-subjuntivo-avanzado",
+          "title": "İleri Dilek Kipi Kullanımı",
+          "subtitle": "Usos Avanzados del Subjuntivo",
+          "intro": "Subjuntivonun en ince kullanımları: zaman bağlaçları, bağıl cümleler ve kalıplar.",
+          "tables": [
+            {
+              "label": "Subjuntivo gerektiren bağlaçlar",
+              "accent": "amber",
+              "headers": ["Bağlaç", "Kullanım", "Örnek"],
+              "rows": [
+                ["aunque", "gerçek değilse subj.", "Aunque llueva, saldré."],
+                ["cuando", "gelecek anlam → subj.", "Cuando llegues, llámame."],
+                ["antes de que", "her zaman subj.", "Antes de que te vayas..."],
+                ["para que", "her zaman subj.", "Te lo digo para que lo sepas."],
+                ["a menos que", "her zaman subj.", "Iré a menos que llueva."],
+                ["con tal de que", "her zaman subj.", "Lo hago con tal de que me ayudes."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "Busco a alguien que hable chino.", "tr": "Çince konuşan birini arıyorum. (belirsiz kişi → subj.)"},
+            {"es": "No hay nadie que lo sepa.", "tr": "Bunu bilen kimse yok. (olumsuz → subj.)"},
+            {"es": "Haré lo que me pidas.", "tr": "İstediğin her şeyi yapacağım."}
+          ],
+          "tips": ["aunque + indicativo = kabul edilen gerçek; aunque + subjuntivo = varsayılan, gerçek olmayan durum", "cuando + subjuntivo sadece gelecek veya genel anlam için; geçmiş için indicativo"]
+        },
+        {
+          "id": "c2-oraciones-relativas",
+          "title": "İlgi Cümleleri",
+          "subtitle": "Oraciones de Relativo",
+          "intro": "İlgi zamirlerinin seçimi (que, quien, el cual, cuyo...) bağlama göre değişir ve C2 yazımında kritik öneme sahiptir.",
+          "tables": [
+            {
+              "label": "İlgi zamirleri",
+              "accent": "blue",
+              "headers": ["Zamir", "Kullanım", "Örnek"],
+              "rows": [
+                ["que", "kişi ve nesne için genel", "El libro que leí era bueno."],
+                ["quien/quienes", "yalnızca kişi, virgüllü yan cümle", "Mi amigo, quien vive en Madrid,..."],
+                ["el/la/los/las que", "belirli gönderimler", "El que llegue primero gana."],
+                ["el/la cual", "belirsizliği gidermek için", "La empresa para la cual trabajo..."],
+                ["cuyo/cuya", "iyelik (whose)", "El autor cuya novela leí..."],
+                ["donde", "yer", "La ciudad donde nací..."]
+              ]
+            }
+          ],
+          "examples": [
+            {"es": "El candidato cuyos méritos son indiscutibles...", "tr": "Liyakati tartışılmaz olan aday..."},
+            {"es": "Quienes no estén de acuerdo pueden retirarse.", "tr": "Katılmayanlar çekilebilir."},
+            {"es": "La razón por la cual dimitió sigue siendo un misterio.", "tr": "İstifa etme nedeni hâlâ gizemini koruyor."}
+          ],
+          "tips": ["cuyo cinsiyet ve sayıca iyelik edilen isimle uyuşur, değil iyelik sahibiyle", "el cual yapısı virgüllü yan cümlelerde ve edat+ilgi zamiri kombinasyonlarında tercih edilir"]
+        }
+      ]
+    }
+  ]
+}
